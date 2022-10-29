@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_repository/model/model.dart';
 import 'package:movie_repository/movie_repository.dart';
 
 part 'movie_event.dart';
@@ -27,7 +26,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       final movies = await _movieRepository.getPopularMovies();
       emit(state.copyWith(status: MovieStatus.finished, movies: movies));
     } catch (error, stackTrace) {
-      emit(state.copyWith(status: MovieStatus.finished));
+      emit(state.copyWith(status: MovieStatus.error));
       addError(error, stackTrace);
     }
   }

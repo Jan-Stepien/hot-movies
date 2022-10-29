@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hot_movies/l10n/l10n.dart';
 import 'package:hot_movies/movie/movie.dart';
-import 'package:movie_repository/model/model.dart';
 import 'package:movie_repository/movie_repository.dart';
 
 class MoviePage extends StatelessWidget {
   const MoviePage({super.key});
 
-  static const routeName = '/movie';
+  static Route<void> route() => MaterialPageRoute<void>(
+        builder: (_) => const MoviePage(),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,9 @@ class MovieView extends StatelessWidget {
           itemCount: movies.length,
           itemBuilder: (context, index) => ListTile(
             key: ValueKey(movies[index]),
+            onTap: () => Navigator.of(context).push(
+              MovieDetailsPage.route(id: movies[index].id),
+            ),
             leading: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.background,
               backgroundImage: movies[index].backdropPath != null

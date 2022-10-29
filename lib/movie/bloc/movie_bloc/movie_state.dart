@@ -3,6 +3,7 @@ part of 'movie_bloc.dart';
 enum MovieStatus {
   initial,
   loading,
+  error,
   finished,
 }
 
