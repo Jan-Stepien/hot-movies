@@ -2,5 +2,13 @@
     "movieViewerTitle": "Movie viewer",
     "@movieViewerTitle": {
         "description": "Text shown in the AppBar of the Movie Page"
+    },
+    "problemLoadingContentMessage": "Problem loading content",
+    "@problemLoadingContentMessage": {
+        "description": "Message displayed when problem with loading content occured"
+    },
+    "refresh": "Refresh",
+    "@refresh": {
+        "description": "Text message displaying 'refresh'"
     }
 }

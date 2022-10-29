@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hot_movies/l10n/l10n.dart';
 import 'package:hot_movies/movie/movie.dart';
+import 'package:hot_movies/shared/loading_content_error.dart';
 import 'package:movie_repository/movie_repository.dart';
 
 class MoviePage extends StatelessWidget {
@@ -34,6 +35,10 @@ class MovieView extends StatelessWidget {
     final isLoading = context.select<MovieBloc, bool>(
       (bloc) => bloc.state.status == MovieStatus.loading,
     );
+    final isLoaded = context.select<MovieBloc, bool>(
+      (bloc) => bloc.state.status == MovieStatus.finished,
+    );
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -41,30 +46,37 @@ class MovieView extends StatelessWidget {
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: movies.length,
-                itemBuilder: (context, index) => ListTile(
-                  key: ValueKey(movies[index]),
-                  onTap: () => Navigator.of(context).push(
-                    MovieDetailsPage.route(id: movies[index].id),
+          : isLoaded
+              ? SingleChildScrollView(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: movies.length,
+                    itemBuilder: (context, index) => ListTile(
+                      key: ValueKey(movies[index]),
+                      onTap: () => Navigator.of(context).push(
+                        MovieDetailsPage.route(id: movies[index].id),
+                      ),
+                      leading: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        backgroundImage: movies[index].backdropPath != null
+                            ? CachedNetworkImageProvider(
+                                movies[index].backdropPath!,
+                              )
+                            : null,
+                      ),
+                      title: Text(movies[index].title),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                    separatorBuilder: (context, index) => const Divider(),
                   ),
-                  leading: CircleAvatar(
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    backgroundImage: movies[index].backdropPath != null
-                        ? CachedNetworkImageProvider(
-                            movies[index].backdropPath!,
-                          )
-                        : null,
-                  ),
-                  title: Text(movies[index].title),
-                  trailing: const Icon(Icons.chevron_right),
+                )
+              : LoadingContentError(
+                  onRetry: () => context.read<MovieBloc>().add(
+                        PopularMoviesRequested(),
+                      ),
                 ),
-                separatorBuilder: (context, index) => const Divider(),
-              ),
-            ),
     );
   }
 }
