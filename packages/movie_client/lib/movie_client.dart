@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:http_client/http_client.dart';
 import 'package:movie_client/model/model.dart';
 
+export 'model/model.dart';
+
 /// [MovieClient] is a class that provides access to the Movie API.
 class MovieClient {
   MovieClient({

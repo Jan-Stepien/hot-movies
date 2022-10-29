@@ -3,6 +3,8 @@ library movie_client;
 import 'package:movie_client/movie_client.dart';
 import 'package:movie_repository/model/model.dart';
 
+export 'model/model.dart';
+
 /// A [MovieRepository] responsible for managing [Movie] collection and [Movie] details.
 class MovieRepository {
   MovieRepository({
