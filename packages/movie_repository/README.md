@@ -1,0 +1,1 @@
+A `MovieRepository` responsible for managing `Movie` collection and  `Movie` details.
