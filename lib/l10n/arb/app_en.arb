@@ -1,6 +1,6 @@
 {
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "movieViewerTitle": "Movie viewer",
+    "@movieViewerTitle": {
+        "description": "Text shown in the AppBar of the Movie Page"
     }
 }
