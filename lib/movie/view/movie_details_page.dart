@@ -51,6 +51,9 @@ class MovieDetailsView extends StatelessWidget {
     final title = context.select<MovieDetailsBloc, String?>(
       (bloc) => bloc.state.details?.title,
     );
+    final isLoading = context.select<MovieDetailsBloc, bool>(
+      (bloc) => bloc.state.status == MovieDetailsStatus.loading,
+    );
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -60,25 +63,27 @@ class MovieDetailsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.padding,
         ),
-        child: ListView(
-          children: [
-            const SizedBox(height: AppSpacing.padding),
-            Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                HeadshotImage(
-                  imageUrl: imageUrl,
-                ),
-                ScoreBadge(score: score, size: AppSpacing.iconSizexl),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.paddingxxl),
-            Text(
-              overview ?? '',
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ],
-        ),
+        child: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
+                children: [
+                  const SizedBox(height: AppSpacing.padding),
+                  Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      HeadshotImage(
+                        imageUrl: imageUrl,
+                      ),
+                      ScoreBadge(score: score, size: AppSpacing.iconSizexl),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.paddingxxl),
+                  Text(
+                    overview ?? '',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
+              ),
       ),
     );
   }
