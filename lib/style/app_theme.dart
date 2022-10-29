@@ -5,6 +5,7 @@ class AppTheme {
   ThemeData get themeData => ThemeData(
         colorScheme: _colorScheme,
         listTileTheme: _listTileTheme,
+        textTheme: _textTheme,
       );
 
   ColorScheme get _colorScheme => const ColorScheme(
@@ -25,5 +26,11 @@ class AppTheme {
       );
   ListTileThemeData get _listTileTheme => const ListTileThemeData(
         iconColor: AppColors.listTileIconColor,
+      );
+
+  TextTheme get _textTheme => const TextTheme().copyWith(
+        bodyText2: const TextStyle(
+          height: 1.75,
+        ),
       );
 }
