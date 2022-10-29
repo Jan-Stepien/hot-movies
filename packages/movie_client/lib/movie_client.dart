@@ -55,4 +55,28 @@ class MovieClient {
       throw GetPopularMoviesException(error, stackTrace);
     }
   }
+
+  /// [getMovieDetails] returns a [MovieDetailsDTO] for given [id].
+  Future<MovieDetailsDTO> getMovieDetails({required int id}) async {
+    final uri = Uri.parse(_baseUrl + basePath + id.toString())
+        .replace(queryParameters: getApiKeyQueryParameter);
+
+    try {
+      final response = await _httpClient.get(uri);
+
+      if (response.statusCode == HttpStatus.ok) {
+        final movieDetailsJson = jsonDecode(response.body);
+        return MovieDetailsDTO.fromJson(movieDetailsJson);
+      } else {
+        throw GetMovieDetailsNetworkException(
+          statusCode: response.statusCode,
+          body: response.body,
+        );
+      }
+    } on GetMovieDetailsNetworkException {
+      rethrow;
+    } catch (error, stackTrace) {
+      throw GetMovieDetailsException(error, stackTrace);
+    }
+  }
 }

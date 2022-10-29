@@ -13,3 +13,17 @@ class GetPopularMoviesNetworkException implements MovieClientException {
   final int statusCode;
   final String? body;
 }
+
+class GetMovieDetailsException implements MovieClientException {
+  GetMovieDetailsException(this.error, this.stackTrace);
+
+  Object? error;
+  Object? stackTrace;
+}
+
+class GetMovieDetailsNetworkException implements MovieClientException {
+  const GetMovieDetailsNetworkException({required this.statusCode, this.body});
+
+  final int statusCode;
+  final String? body;
+}
