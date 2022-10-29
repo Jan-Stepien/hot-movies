@@ -16,9 +16,9 @@ class Movie extends Equatable {
 
   factory Movie.fromMovieDTO(MovieDTO movieDTO) {
     return Movie(
-      id: movieDTO.id,
-      title: movieDTO.title,
-      backdropPath: movieDTO.backdropPath,
+      id: movieDTO.id ?? 0,
+      title: movieDTO.title ?? '',
+      backdropPath: movieDTO.backdropPath ?? '',
     );
   }
 

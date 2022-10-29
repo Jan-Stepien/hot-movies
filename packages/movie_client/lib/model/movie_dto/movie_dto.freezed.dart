@@ -20,20 +20,20 @@ MovieDTO _$MovieDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieDTO {
-  String get posterPath => throw _privateConstructorUsedError;
-  bool get adult => throw _privateConstructorUsedError;
-  String get overview => throw _privateConstructorUsedError;
-  String get releaseDate => throw _privateConstructorUsedError;
-  List<int> get genreIds => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
-  String get originalTitle => throw _privateConstructorUsedError;
-  String get originalLanguage => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get backdropPath => throw _privateConstructorUsedError;
-  double get popularity => throw _privateConstructorUsedError;
-  int get voteCount => throw _privateConstructorUsedError;
-  bool get video => throw _privateConstructorUsedError;
-  double get voteAverage => throw _privateConstructorUsedError;
+  String? get posterPath => throw _privateConstructorUsedError;
+  bool? get adult => throw _privateConstructorUsedError;
+  String? get overview => throw _privateConstructorUsedError;
+  String? get releaseDate => throw _privateConstructorUsedError;
+  List<int>? get genreIds => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get originalTitle => throw _privateConstructorUsedError;
+  String? get originalLanguage => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get backdropPath => throw _privateConstructorUsedError;
+  double? get popularity => throw _privateConstructorUsedError;
+  int? get voteCount => throw _privateConstructorUsedError;
+  bool? get video => throw _privateConstructorUsedError;
+  double? get voteAverage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,20 +47,20 @@ abstract class $MovieDTOCopyWith<$Res> {
       _$MovieDTOCopyWithImpl<$Res, MovieDTO>;
   @useResult
   $Res call(
-      {String posterPath,
-      bool adult,
-      String overview,
-      String releaseDate,
-      List<int> genreIds,
-      int id,
-      String originalTitle,
-      String originalLanguage,
-      String title,
-      String backdropPath,
-      double popularity,
-      int voteCount,
-      bool video,
-      double voteAverage});
+      {String? posterPath,
+      bool? adult,
+      String? overview,
+      String? releaseDate,
+      List<int>? genreIds,
+      int? id,
+      String? originalTitle,
+      String? originalLanguage,
+      String? title,
+      String? backdropPath,
+      double? popularity,
+      int? voteCount,
+      bool? video,
+      double? voteAverage});
 }
 
 /// @nodoc
@@ -76,78 +76,78 @@ class _$MovieDTOCopyWithImpl<$Res, $Val extends MovieDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? posterPath = null,
-    Object? adult = null,
-    Object? overview = null,
-    Object? releaseDate = null,
-    Object? genreIds = null,
-    Object? id = null,
-    Object? originalTitle = null,
-    Object? originalLanguage = null,
-    Object? title = null,
-    Object? backdropPath = null,
-    Object? popularity = null,
-    Object? voteCount = null,
-    Object? video = null,
-    Object? voteAverage = null,
+    Object? posterPath = freezed,
+    Object? adult = freezed,
+    Object? overview = freezed,
+    Object? releaseDate = freezed,
+    Object? genreIds = freezed,
+    Object? id = freezed,
+    Object? originalTitle = freezed,
+    Object? originalLanguage = freezed,
+    Object? title = freezed,
+    Object? backdropPath = freezed,
+    Object? popularity = freezed,
+    Object? voteCount = freezed,
+    Object? video = freezed,
+    Object? voteAverage = freezed,
   }) {
     return _then(_value.copyWith(
-      posterPath: null == posterPath
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      adult: null == adult
+              as String?,
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      overview: null == overview
+              as bool?,
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String,
-      releaseDate: null == releaseDate
+              as String?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      genreIds: null == genreIds
+              as String?,
+      genreIds: freezed == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      id: null == id
+              as List<int>?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      originalTitle: null == originalTitle
+              as int?,
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalLanguage: null == originalLanguage
+              as String?,
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
+              as String?,
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      backdropPath: null == backdropPath
+              as String?,
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      popularity: null == popularity
+              as String?,
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      video: null == video
+              as int?,
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voteAverage: null == voteAverage
+              as bool?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ) as $Val);
   }
 }
@@ -160,20 +160,20 @@ abstract class _$$_MovieDTOCopyWith<$Res> implements $MovieDTOCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String posterPath,
-      bool adult,
-      String overview,
-      String releaseDate,
-      List<int> genreIds,
-      int id,
-      String originalTitle,
-      String originalLanguage,
-      String title,
-      String backdropPath,
-      double popularity,
-      int voteCount,
-      bool video,
-      double voteAverage});
+      {String? posterPath,
+      bool? adult,
+      String? overview,
+      String? releaseDate,
+      List<int>? genreIds,
+      int? id,
+      String? originalTitle,
+      String? originalLanguage,
+      String? title,
+      String? backdropPath,
+      double? popularity,
+      int? voteCount,
+      bool? video,
+      double? voteAverage});
 }
 
 /// @nodoc
@@ -187,78 +187,78 @@ class __$$_MovieDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? posterPath = null,
-    Object? adult = null,
-    Object? overview = null,
-    Object? releaseDate = null,
-    Object? genreIds = null,
-    Object? id = null,
-    Object? originalTitle = null,
-    Object? originalLanguage = null,
-    Object? title = null,
-    Object? backdropPath = null,
-    Object? popularity = null,
-    Object? voteCount = null,
-    Object? video = null,
-    Object? voteAverage = null,
+    Object? posterPath = freezed,
+    Object? adult = freezed,
+    Object? overview = freezed,
+    Object? releaseDate = freezed,
+    Object? genreIds = freezed,
+    Object? id = freezed,
+    Object? originalTitle = freezed,
+    Object? originalLanguage = freezed,
+    Object? title = freezed,
+    Object? backdropPath = freezed,
+    Object? popularity = freezed,
+    Object? voteCount = freezed,
+    Object? video = freezed,
+    Object? voteAverage = freezed,
   }) {
     return _then(_$_MovieDTO(
-      posterPath: null == posterPath
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      adult: null == adult
+              as String?,
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
-              as bool,
-      overview: null == overview
+              as bool?,
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
-              as String,
-      releaseDate: null == releaseDate
+              as String?,
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      genreIds: null == genreIds
+              as String?,
+      genreIds: freezed == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      id: null == id
+              as List<int>?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      originalTitle: null == originalTitle
+              as int?,
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalLanguage: null == originalLanguage
+              as String?,
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
+              as String?,
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      backdropPath: null == backdropPath
+              as String?,
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      popularity: null == popularity
+              as String?,
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as double,
-      voteCount: null == voteCount
+              as double?,
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      video: null == video
+              as int?,
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voteAverage: null == voteAverage
+              as bool?,
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -271,7 +271,7 @@ class _$_MovieDTO implements _MovieDTO {
       required this.adult,
       required this.overview,
       required this.releaseDate,
-      required final List<int> genreIds,
+      required final List<int>? genreIds,
       required this.id,
       required this.originalTitle,
       required this.originalLanguage,
@@ -287,38 +287,40 @@ class _$_MovieDTO implements _MovieDTO {
       _$$_MovieDTOFromJson(json);
 
   @override
-  final String posterPath;
+  final String? posterPath;
   @override
-  final bool adult;
+  final bool? adult;
   @override
-  final String overview;
+  final String? overview;
   @override
-  final String releaseDate;
-  final List<int> _genreIds;
+  final String? releaseDate;
+  final List<int>? _genreIds;
   @override
-  List<int> get genreIds {
+  List<int>? get genreIds {
+    final value = _genreIds;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_genreIds);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int id;
+  final int? id;
   @override
-  final String originalTitle;
+  final String? originalTitle;
   @override
-  final String originalLanguage;
+  final String? originalLanguage;
   @override
-  final String title;
+  final String? title;
   @override
-  final String backdropPath;
+  final String? backdropPath;
   @override
-  final double popularity;
+  final double? popularity;
   @override
-  final int voteCount;
+  final int? voteCount;
   @override
-  final bool video;
+  final bool? video;
   @override
-  final double voteAverage;
+  final double? voteAverage;
 
   @override
   String toString() {
@@ -390,51 +392,51 @@ class _$_MovieDTO implements _MovieDTO {
 
 abstract class _MovieDTO implements MovieDTO {
   const factory _MovieDTO(
-      {required final String posterPath,
-      required final bool adult,
-      required final String overview,
-      required final String releaseDate,
-      required final List<int> genreIds,
-      required final int id,
-      required final String originalTitle,
-      required final String originalLanguage,
-      required final String title,
-      required final String backdropPath,
-      required final double popularity,
-      required final int voteCount,
-      required final bool video,
-      required final double voteAverage}) = _$_MovieDTO;
+      {required final String? posterPath,
+      required final bool? adult,
+      required final String? overview,
+      required final String? releaseDate,
+      required final List<int>? genreIds,
+      required final int? id,
+      required final String? originalTitle,
+      required final String? originalLanguage,
+      required final String? title,
+      required final String? backdropPath,
+      required final double? popularity,
+      required final int? voteCount,
+      required final bool? video,
+      required final double? voteAverage}) = _$_MovieDTO;
 
   factory _MovieDTO.fromJson(Map<String, dynamic> json) = _$_MovieDTO.fromJson;
 
   @override
-  String get posterPath;
+  String? get posterPath;
   @override
-  bool get adult;
+  bool? get adult;
   @override
-  String get overview;
+  String? get overview;
   @override
-  String get releaseDate;
+  String? get releaseDate;
   @override
-  List<int> get genreIds;
+  List<int>? get genreIds;
   @override
-  int get id;
+  int? get id;
   @override
-  String get originalTitle;
+  String? get originalTitle;
   @override
-  String get originalLanguage;
+  String? get originalLanguage;
   @override
-  String get title;
+  String? get title;
   @override
-  String get backdropPath;
+  String? get backdropPath;
   @override
-  double get popularity;
+  double? get popularity;
   @override
-  int get voteCount;
+  int? get voteCount;
   @override
-  bool get video;
+  bool? get video;
   @override
-  double get voteAverage;
+  double? get voteAverage;
   @override
   @JsonKey(ignore: true)
   _$$_MovieDTOCopyWith<_$_MovieDTO> get copyWith =>

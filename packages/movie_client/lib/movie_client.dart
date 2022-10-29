@@ -28,16 +28,14 @@ class MovieClient {
   Future<List<MovieDTO>> getPopularMovies() async {
     const getPopularMoviesPath = '/popular';
 
-    final uri = Uri(
-      path: _baseUrl + basePath + getPopularMoviesPath,
-      queryParameters: _getApiKeyQueryParameter,
-    );
+    final uri = Uri.parse(_baseUrl + basePath + getPopularMoviesPath)
+        .replace(queryParameters: _getApiKeyQueryParameter);
 
     try {
       final response = await _httpClient.get(uri);
 
       if (response.statusCode == HttpStatus.ok) {
-        final resultList = jsonDecode(response.body) as List;
+        final resultList = jsonDecode(response.body)["results"] as List;
         return resultList
             .map((movieJson) => MovieDTO.fromJson(movieJson))
             .toList();
