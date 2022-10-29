@@ -17,19 +17,7 @@ class MovieRepository {
   Future<List<Movie>> getPopularMovies() async {
     final moviesDTO = await _movieClient.getPopularMovies();
 
-    final imageBaseUrl = _movieClient.imageBaseUrl;
-
-    return moviesDTO
-        .map(
-          (item) => Movie.fromMovieDTO(
-            item.copyWith(
-              backdropPath: item.backdropPath != null
-                  ? '$imageBaseUrl${item.backdropPath}'
-                  : null,
-            ),
-          ),
-        )
-        .toList();
+    return _mapMovieDTOListToMovieList(moviesDTO: moviesDTO);
   }
 
   /// Returns a [MovieDetails] for given [id].
@@ -45,5 +33,29 @@ class MovieRepository {
             : null,
       ),
     );
+  }
+
+  /// Returns a list of [Movie] containing [query].
+  Future<List<Movie>> searchMovies({required String query}) async {
+    final moviesDTO = await _movieClient.searchMovies(query: query);
+
+    return _mapMovieDTOListToMovieList(moviesDTO: moviesDTO);
+  }
+
+  /// Maps list of [MovieDTO] to list of [Movie].
+  List<Movie> _mapMovieDTOListToMovieList({required List<MovieDTO> moviesDTO}) {
+    final imageBaseUrl = _movieClient.imageBaseUrl;
+
+    return moviesDTO
+        .map(
+          (item) => Movie.fromMovieDTO(
+            item.copyWith(
+              backdropPath: item.backdropPath != null
+                  ? '$imageBaseUrl${item.backdropPath}'
+                  : null,
+            ),
+          ),
+        )
+        .toList();
   }
 }
