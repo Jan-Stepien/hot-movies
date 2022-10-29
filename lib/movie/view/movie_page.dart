@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hot_movies/l10n/l10n.dart';
 import 'package:hot_movies/movie/movie.dart';
 import 'package:hot_movies/shared/loading_content_error.dart';
 import 'package:movie_repository/movie_repository.dart';
@@ -40,10 +39,7 @@ class MovieView extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text(context.l10n.movieViewerTitle),
-      ),
+      appBar: const MovieSearchAppBar(),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : isLoaded

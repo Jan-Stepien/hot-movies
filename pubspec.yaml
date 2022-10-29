@@ -22,6 +22,7 @@ dependencies:
     path: packages/movie_client
   movie_repository:
     path: packages/movie_repository
+  stream_transform: ^2.0.1
 
 dev_dependencies:
   bloc_test: ^9.1.0
