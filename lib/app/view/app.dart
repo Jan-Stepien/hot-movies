@@ -19,10 +19,7 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        initialRoute: MoviePage.routeName,
-        routes: {
-          MoviePage.routeName: (_) => const MoviePage(),
-        },
+        onGenerateRoute: (settings) => MoviePage.route(),
       ),
     );
   }
