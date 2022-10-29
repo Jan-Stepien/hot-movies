@@ -23,7 +23,7 @@ void main() {
     );
   });
 
-  const movie = MovieDTO(
+  const movieDTO = MovieDTO(
     posterPath: 'posterPath',
     adult: true,
     overview: 'overview',
@@ -48,12 +48,12 @@ void main() {
           'returns list of movies '
           'when httpCall succeeds', () async {
         when(() => httpClient.get(any())).thenAnswer(
-          (invocation) async => Response(jsonEncode([movie]), 200),
+          (invocation) async => Response(jsonEncode([movieDTO]), 200),
         );
 
         final result = await movieClient.getPopularMovies();
 
-        expect(result, [movie]);
+        expect(result, [movieDTO]);
         verify(() => httpClient.get(any())).called(1);
       });
 
@@ -74,7 +74,7 @@ void main() {
           'when response.statusCode is not HttpStatus.ok', () async {
         when(() => httpClient.get(any())).thenAnswer(
           (invocation) async =>
-              Response(jsonEncode([movie]), HttpStatus.badRequest),
+              Response(jsonEncode([movieDTO]), HttpStatus.badRequest),
         );
 
         expect(movieClient.getPopularMovies(),
