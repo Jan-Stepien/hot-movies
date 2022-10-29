@@ -8,12 +8,19 @@ environment:
 
 dependencies:
   bloc: ^8.1.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  http_client:
+    path: packages/http_client
   intl: ^0.17.0
+  movie_client:
+    path: packages/movie_client
+  movie_repository:
+    path: packages/movie_repository
 
 dev_dependencies:
   bloc_test: ^9.1.0
