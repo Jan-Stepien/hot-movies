@@ -15,6 +15,18 @@ class MovieRepository {
   Future<List<Movie>> getPopularMovies() async {
     final moviesDTO = await _movieClient.getPopularMovies();
 
-    return moviesDTO.map(Movie.fromMovieDTO).toList();
+    final imageBaseUrl = _movieClient.imageBaseUrl;
+
+    return moviesDTO
+        .map(
+          (item) => Movie.fromMovieDTO(
+            item.copyWith(
+              backdropPath: item.backdropPath != null
+                  ? '$imageBaseUrl${item.backdropPath}'
+                  : null,
+            ),
+          ),
+        )
+        .toList();
   }
 }

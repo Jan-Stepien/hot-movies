@@ -6,7 +6,7 @@ import 'package:movie_client/model/model.dart';
 class Movie extends Equatable {
   final int id;
   final String title;
-  final String backdropPath;
+  final String? backdropPath;
 
   const Movie({
     required this.id,
@@ -18,7 +18,7 @@ class Movie extends Equatable {
     return Movie(
       id: movieDTO.id ?? 0,
       title: movieDTO.title ?? '',
-      backdropPath: movieDTO.backdropPath ?? '',
+      backdropPath: movieDTO.backdropPath,
     );
   }
 

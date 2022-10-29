@@ -7,37 +7,37 @@ part of 'movie_dto.dart';
 // **************************************************************************
 
 _$_MovieDTO _$$_MovieDTOFromJson(Map<String, dynamic> json) => _$_MovieDTO(
-      posterPath: json['posterPath'] as String?,
+      posterPath: json['poster_path'] as String?,
       adult: json['adult'] as bool?,
       overview: json['overview'] as String?,
-      releaseDate: json['releaseDate'] as String?,
+      releaseDate: json['release_date'] as String?,
       genreIds:
-          (json['genreIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
+          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       id: json['id'] as int?,
-      originalTitle: json['originalTitle'] as String?,
-      originalLanguage: json['originalLanguage'] as String?,
+      originalTitle: json['original_title'] as String?,
+      originalLanguage: json['original_language'] as String?,
       title: json['title'] as String?,
-      backdropPath: json['backdropPath'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
-      voteCount: json['voteCount'] as int?,
+      voteCount: json['vote_count'] as int?,
       video: json['video'] as bool?,
-      voteAverage: (json['voteAverage'] as num?)?.toDouble(),
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_MovieDTOToJson(_$_MovieDTO instance) =>
     <String, dynamic>{
-      'posterPath': instance.posterPath,
+      'poster_path': instance.posterPath,
       'adult': instance.adult,
       'overview': instance.overview,
-      'releaseDate': instance.releaseDate,
-      'genreIds': instance.genreIds,
+      'release_date': instance.releaseDate,
+      'genre_ids': instance.genreIds,
       'id': instance.id,
-      'originalTitle': instance.originalTitle,
-      'originalLanguage': instance.originalLanguage,
+      'original_title': instance.originalTitle,
+      'original_language': instance.originalLanguage,
       'title': instance.title,
-      'backdropPath': instance.backdropPath,
+      'backdrop_path': instance.backdropPath,
       'popularity': instance.popularity,
-      'voteCount': instance.voteCount,
+      'vote_count': instance.voteCount,
       'video': instance.video,
-      'voteAverage': instance.voteAverage,
+      'vote_average': instance.voteAverage,
     };

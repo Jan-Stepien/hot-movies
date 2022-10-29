@@ -14,13 +14,17 @@ class MovieClient {
     required String baseUrl,
   })  : _httpClient = httpClient,
         _apiKey = apiKey,
-        _baseUrl = 'https://api.themoviedb.org/3';
+        _baseUrl = 'https://api.themoviedb.org/3',
+        _imageBaseUrl = 'https://image.tmdb.org/t/p/original/';
 
   final HttpClient _httpClient;
   final String _apiKey;
   final String _baseUrl;
+  final String _imageBaseUrl;
 
-  Map<String, String> get _getApiKeyQueryParameter => {'api_key': _apiKey};
+  String get baseUrl => _baseUrl;
+  String get imageBaseUrl => _imageBaseUrl;
+  Map<String, String> get getApiKeyQueryParameter => {'api_key': _apiKey};
 
   static const basePath = '/movie';
 
@@ -29,7 +33,7 @@ class MovieClient {
     const getPopularMoviesPath = '/popular';
 
     final uri = Uri.parse(_baseUrl + basePath + getPopularMoviesPath)
-        .replace(queryParameters: _getApiKeyQueryParameter);
+        .replace(queryParameters: getApiKeyQueryParameter);
 
     try {
       final response = await _httpClient.get(uri);
