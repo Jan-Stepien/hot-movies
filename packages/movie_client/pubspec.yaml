@@ -1,5 +1,5 @@
 name: movie_client
-description: The client responsible for accessing movies domain data.
+description: The client responsible for accessing remote movie data.
 version: 0.0.1
 publish_to: none
 
