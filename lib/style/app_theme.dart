@@ -11,7 +11,8 @@ class AppTheme {
         primary: AppColors.primary,
         onPrimary: AppColors.onPrimary,
 
-        // TODO(jan-stepien): The following colors should be replaced with the correct colors.
+        // TODO(jan-stepien): The following colors should be replaced
+        // with the correct colors.
         secondary: AppColors.primary,
         onSecondary: AppColors.onPrimary,
         error: AppColors.primary,
