@@ -41,10 +41,7 @@ class MovieClient {
       final response = await _httpClient.get(uri);
 
       if (response.statusCode == HttpStatus.ok) {
-        final resultList = jsonDecode(response.body)["results"] as List;
-        return resultList
-            .map((movieJson) => MovieDTO.fromJson(movieJson))
-            .toList();
+        return _parseMovieListResponse(response.body);
       } else {
         throw GetPopularMoviesNetworkException(
           statusCode: response.statusCode,
@@ -80,5 +77,36 @@ class MovieClient {
     } catch (error, stackTrace) {
       throw GetMovieDetailsException(error, stackTrace);
     }
+  }
+
+  /// [searchMovies] returns a list of [MovieDTO] containing [query].
+  Future<List<MovieDTO>> searchMovies({required String query}) async {
+    const searchMoviesPath = '/search/movie';
+
+    final uri = Uri.parse(_baseUrl + searchMoviesPath).replace(
+        queryParameters: getApiKeyQueryParameter..addAll({'query': query}));
+
+    try {
+      final response = await _httpClient.get(uri);
+
+      if (response.statusCode == HttpStatus.ok) {
+        return _parseMovieListResponse(response.body);
+      } else {
+        throw SearchMoviesNetworkException(
+          statusCode: response.statusCode,
+          body: response.body,
+        );
+      }
+    } on SearchMoviesNetworkException {
+      rethrow;
+    } catch (error, stackTrace) {
+      throw SearchMoviesException(error, stackTrace);
+    }
+  }
+
+  /// Parses response to list of [MovieDTO]
+  List<MovieDTO> _parseMovieListResponse(String response) {
+    final resultList = jsonDecode(response)["results"] as List;
+    return resultList.map((movieJson) => MovieDTO.fromJson(movieJson)).toList();
   }
 }

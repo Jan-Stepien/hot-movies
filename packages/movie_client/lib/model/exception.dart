@@ -27,3 +27,17 @@ class GetMovieDetailsNetworkException implements MovieClientException {
   final int statusCode;
   final String? body;
 }
+
+class SearchMoviesException implements MovieClientException {
+  SearchMoviesException(this.error, this.stackTrace);
+
+  Object? error;
+  Object? stackTrace;
+}
+
+class SearchMoviesNetworkException implements MovieClientException {
+  const SearchMoviesNetworkException({required this.statusCode, this.body});
+
+  final int statusCode;
+  final String? body;
+}
