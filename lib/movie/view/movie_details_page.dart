@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hot_movies/movie/movie.dart';
-import 'package:hot_movies/movie/widget/widget.dart';
 import 'package:hot_movies/shared/loading_content_error.dart';
 import 'package:hot_movies/style/style.dart';
 import 'package:movie_repository/movie_repository.dart';
