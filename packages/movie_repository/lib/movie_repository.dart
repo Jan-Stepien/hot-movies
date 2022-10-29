@@ -29,4 +29,19 @@ class MovieRepository {
         )
         .toList();
   }
+
+  /// Returns a [MovieDetails] for given [id].
+  Future<MovieDetails> getMovieDetails({required int id}) async {
+    final movieDetailsDTO = await _movieClient.getMovieDetails(id: id);
+
+    final imageBaseUrl = _movieClient.imageBaseUrl;
+
+    return MovieDetails.fromMovieDetailsDTO(
+      movieDetailsDTO.copyWith(
+        backdropPath: movieDetailsDTO.backdropPath != null
+            ? '$imageBaseUrl${movieDetailsDTO.backdropPath}'
+            : null,
+      ),
+    );
+  }
 }
