@@ -1,7 +1,5 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:movie_client/model/model.dart';
 import 'package:movie_client/movie_client.dart';
-import 'package:movie_repository/model/model.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';

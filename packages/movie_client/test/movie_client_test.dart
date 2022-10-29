@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:http_client/http_client.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:movie_client/model/model.dart';
 import 'package:movie_client/movie_client.dart';
 import 'package:test/test.dart';
 
