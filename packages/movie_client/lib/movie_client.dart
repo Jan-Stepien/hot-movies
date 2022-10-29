@@ -28,11 +28,11 @@ class MovieClient {
   String get imageBaseUrl => _imageBaseUrl;
   Map<String, String> get getApiKeyQueryParameter => {'api_key': _apiKey};
 
-  static const basePath = '/movie';
+  static const basePath = '/movie/';
 
   /// [getPopularMovies] returns a list of popular movies.
   Future<List<MovieDTO>> getPopularMovies() async {
-    const getPopularMoviesPath = '/popular';
+    const getPopularMoviesPath = 'popular';
 
     final uri = Uri.parse(_baseUrl + basePath + getPopularMoviesPath)
         .replace(queryParameters: getApiKeyQueryParameter);
