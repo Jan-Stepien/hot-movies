@@ -9,7 +9,7 @@ This project requires themoviedb API key being provided at the build time of the
 To build the project run 
 
 ```sh
-$ flutter run  --dart-define BASE_MOVIES_URL=https://api.themoviedb.org/3 --dart-define MOVIES_API_KEY=<put your key here>
+$ flutter run --dart-define MOVIES_API_KEY=<put your key here>
 ```
 
 ## Technical implementation
