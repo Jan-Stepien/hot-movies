@@ -17,9 +17,6 @@ class DependencyProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     final movieClient = MovieClient(
       httpClient: HttpClient(),
-      baseUrl: const String.fromEnvironment(
-        EnvironmentStringsKeys.baseMoviesUrl,
-      ),
       apiKey: const String.fromEnvironment(
         EnvironmentStringsKeys.moviesAPiKey,
       ),

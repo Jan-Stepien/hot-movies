@@ -13,7 +13,6 @@ class MovieClient {
   MovieClient({
     required HttpClient httpClient,
     required String apiKey,
-    required String baseUrl,
   })  : _httpClient = httpClient,
         _apiKey = apiKey,
         _baseUrl = 'https://api.themoviedb.org/3',
@@ -24,7 +23,6 @@ class MovieClient {
   final String _baseUrl;
   final String _imageBaseUrl;
 
-  String get baseUrl => _baseUrl;
   String get imageBaseUrl => _imageBaseUrl;
   Map<String, String> get getApiKeyQueryParameter => {'api_key': _apiKey};
 

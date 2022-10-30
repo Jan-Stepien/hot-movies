@@ -18,31 +18,34 @@ void main() {
     movieClient = MovieClient(
       httpClient: httpClient,
       apiKey: 'apiKey',
-      baseUrl: 'baseUrl',
     );
   });
+
+  const movieDTO = MovieDTO(
+    posterPath: 'posterPath',
+    adult: true,
+    overview: 'overview',
+    releaseDate: 'releaseDate',
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalTitle: 'originalTitle',
+    originalLanguage: 'originalLanguage',
+    title: 'title',
+    backdropPath: 'backdropPath',
+    popularity: 1.0,
+    voteCount: 1,
+    video: true,
+    voteAverage: 1.0,
+  );
 
   registerFallbackValue(Uri());
 
   group('MovieClient', () {
-    group('getPopularMovies', () {
-      const movieDTO = MovieDTO(
-        posterPath: 'posterPath',
-        adult: true,
-        overview: 'overview',
-        releaseDate: 'releaseDate',
-        genreIds: [1, 2, 3],
-        id: 1,
-        originalTitle: 'originalTitle',
-        originalLanguage: 'originalLanguage',
-        title: 'title',
-        backdropPath: 'backdropPath',
-        popularity: 1.0,
-        voteCount: 1,
-        video: true,
-        voteAverage: 1.0,
-      );
+    test('provides imageBaseUrl accessor', () {
+      expect(movieClient.imageBaseUrl, 'https://image.tmdb.org/t/p/original/');
+    });
 
+    group('getPopularMovies', () {
       test(
           'returns list of movies '
           'when httpCall succeeds', () async {
@@ -161,6 +164,53 @@ void main() {
 
         expect(movieClient.getMovieDetails(id: 1),
             throwsA(isA<GetMovieDetailsNetworkException>()));
+      });
+    });
+
+    group('searchMovies', () {
+      test(
+          'returns list of movies '
+          'when httpCall succeeds', () async {
+        when(() => httpClient.get(any())).thenAnswer(
+          (invocation) => Future.value(
+            Response(
+              jsonEncode({
+                'results': [movieDTO.toJson()],
+              }),
+              HttpStatus.ok,
+            ),
+          ),
+        );
+
+        final result = await movieClient.searchMovies(query: 'query');
+
+        expect(result, [movieDTO]);
+        verify(() => httpClient.get(any())).called(1);
+      });
+
+      test(
+          'throws SearchMoviesException '
+          'when response.body malformed', () async {
+        when(() => httpClient.get(any())).thenAnswer(
+          (invocation) async => Response('malformedBody', HttpStatus.ok),
+        );
+
+        expect(movieClient.searchMovies(query: 'query'),
+            throwsA(isA<SearchMoviesException>()));
+        verify(() => httpClient.get(any())).called(1);
+      });
+
+      test(
+          'throws SearchMoviesNetworkException '
+          'when response.statusCode is not HttpStatus.ok', () async {
+        when(() => httpClient.get(any())).thenAnswer(
+          (invocation) async =>
+              Response(jsonEncode([movieDTO]), HttpStatus.badRequest),
+        );
+
+        expect(movieClient.searchMovies(query: 'query'),
+            throwsA(isA<SearchMoviesNetworkException>()));
+        verify(() => httpClient.get(any())).called(1);
       });
     });
   });
