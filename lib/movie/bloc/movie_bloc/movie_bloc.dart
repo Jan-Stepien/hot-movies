@@ -20,7 +20,6 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       _searchQueryChanged,
       transformer: restartableDebounce(
         _duration,
-        isDebounced: (event) => event.query.isNotEmpty,
       ),
     );
     on<LoadMoreMoviesRequested>(
