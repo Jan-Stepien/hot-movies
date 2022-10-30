@@ -14,5 +14,5 @@ $ flutter run  --dart-define BASE_MOVIES_URL=https://api.themoviedb.org/3 --dart
 
 ## Technical implementation
 
-The project was written following the 4 layer structure of: service, repository, bloc and ui layer. Services and repositories were split into separate flutter packages to enable reusability and developer experience.
+The project was written following the 4 layer structure of: service, repository, bloc and ui layer. Services and repositories were split into separate flutter packages to enable reusability and developer experience. Packages can be found in [packages directory](https://github.com/Jan-Stepien/hot-movies/tree/main/packages).
 
