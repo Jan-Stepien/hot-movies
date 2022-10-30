@@ -1,26 +1,18 @@
-# hot_movies
+# Hot movies
 
-Showcase most popular movies.
+Showcase the most popular movies according to [themoviedb](https://developers.themoviedb.org/3/search/search-movies) version 3.
 
-## Getting Started 🚀
+## Getting Started 
 
-This project contains 3 flavors:
+This project requires themoviedb API key being provided at the build time of the app. To read how to get the key visit [themoviedb documentation](https://developers.themoviedb.org/3/getting-started/authentication).
 
-- development
-- staging
-- production
-
-To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
+To build the project run 
 
 ```sh
-# Development
-$ flutter run --flavor development --target lib/main_development.dart
-
-# Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
-
-# Production
-$ flutter run --flavor production --target lib/main_production.dart
+$ flutter run  --dart-define BASE_MOVIES_URL=https://api.themoviedb.org/3 --dart-define MOVIES_API_KEY=<put your key here>
 ```
 
-_\*Hot Movies works on iOS, Android, Web, and Windows._
+## Techincal implementation
+
+The project was written following the 4 layer structure of: service, repository, bloc and ui layer. Services and repositories were split into separate flutter packages to enable reusability and developer experience.
+
