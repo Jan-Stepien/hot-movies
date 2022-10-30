@@ -12,7 +12,7 @@ To build the project run
 $ flutter run  --dart-define BASE_MOVIES_URL=https://api.themoviedb.org/3 --dart-define MOVIES_API_KEY=<put your key here>
 ```
 
-## Techincal implementation
+## Technical implementation
 
 The project was written following the 4 layer structure of: service, repository, bloc and ui layer. Services and repositories were split into separate flutter packages to enable reusability and developer experience.
 
