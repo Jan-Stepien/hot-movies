@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hot_movies/l10n/localization.dart';
-import 'package:hot_movies/movie/movie.dart';
+import 'package:hot_movies/l10n/l10n.dart';
 
 class MovieSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const MovieSearchAppBar({super.key});
+  const MovieSearchAppBar({super.key, required this.onSearchQueryChanged});
+
+  final ValueSetter<String> onSearchQueryChanged;
 
   @override
   State<MovieSearchAppBar> createState() => _MovieSearchAppBarState();
@@ -30,8 +30,7 @@ class _MovieSearchAppBarState extends State<MovieSearchAppBar> {
               style: Theme.of(context).textTheme.headline6?.copyWith(
                     color: onPrimary,
                   ),
-              onChanged: (query) =>
-                  context.read<MovieBloc>().add(SearchQueryChanged(query)),
+              onChanged: widget.onSearchQueryChanged,
             )
           : Text(context.l10n.movieViewerTitle),
       actions: [
@@ -43,7 +42,7 @@ class _MovieSearchAppBarState extends State<MovieSearchAppBar> {
                 setState(() => isSearchVisible = false);
               } else {
                 _searchController.clear();
-                context.read<MovieBloc>().add(SearchQueryChanged(''));
+                widget.onSearchQueryChanged('');
               }
             },
           )

@@ -15,7 +15,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     required MovieRepository movieRepository,
   })  : _movieRepository = movieRepository,
         super(MovieState.initial()) {
-    on<PopularMoviesRequested>(_movieLoadRequested);
+    on<PopularMoviesRequested>(_popularMoviesRequested);
     on<SearchQueryChanged>(
       _searchQueryChanged,
       transformer: restartableDebounce(
@@ -27,7 +27,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   final MovieRepository _movieRepository;
 
-  FutureOr<void> _movieLoadRequested(
+  FutureOr<void> _popularMoviesRequested(
     PopularMoviesRequested event,
     Emitter<MovieState> emit,
   ) async {

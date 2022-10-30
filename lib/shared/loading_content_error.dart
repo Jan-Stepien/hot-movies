@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hot_movies/l10n/localization.dart';
+import 'package:hot_movies/l10n/l10n.dart';
 import 'package:hot_movies/style/style.dart';
 
 class LoadingContentError extends StatelessWidget {

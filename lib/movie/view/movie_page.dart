@@ -39,7 +39,10 @@ class MovieView extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: const MovieSearchAppBar(),
+      appBar: MovieSearchAppBar(
+        onSearchQueryChanged: (query) =>
+            context.read<MovieBloc>().add(SearchQueryChanged(query)),
+      ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : isLoaded
