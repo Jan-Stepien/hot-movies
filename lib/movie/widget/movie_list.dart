@@ -35,6 +35,7 @@ class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: const Key('movie_list_scroll_view'),
       controller: scrollController,
       child: ListView.separated(
         shrinkWrap: true,

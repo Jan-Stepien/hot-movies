@@ -113,8 +113,7 @@ void main() {
       });
 
       group('finished,', () {
-        testWidgets('renders ListTile for each movie in MovieBloc',
-            (tester) async {
+        testWidgets('renders MovieList', (tester) async {
           when(() => movieBloc.state).thenAnswer(
             (invocation) => MovieState.initial().copyWith(
               status: MovieStatus.finished,
@@ -129,10 +128,10 @@ void main() {
             ),
           );
 
-          expect(find.byType(ListTile), findsNWidgets(movies.length));
+          expect(find.byType(MovieList), findsOneWidget);
         });
 
-        testWidgets('when ListTile is tapped, navigates to MovieDetailsPage',
+        testWidgets('when onLoadMore called adds LoadMoreMoviesRequested',
             (tester) async {
           when(() => movieBloc.state).thenAnswer(
             (invocation) => MovieState.initial().copyWith(
@@ -148,10 +147,13 @@ void main() {
             ),
           );
 
-          await tester.tap(find.byType(ListTile).first);
-          await tester.pumpAndSettle();
+          final movieList = tester.widget<MovieList>(
+            find.byType(MovieList),
+          );
 
-          expect(find.byType(MovieDetailsPage), findsOneWidget);
+          movieList.onLoadMore();
+
+          verify(() => movieBloc.add(LoadMoreMoviesRequested())).called(1);
         });
       });
 

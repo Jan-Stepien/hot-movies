@@ -19,6 +19,25 @@ void main() {
       expect(MovieDetailsPage.route(id: 1), isA<MaterialPageRoute<void>>());
     });
 
+    testWidgets('when MoviePage route pushed navigates to MovieDetailsPage',
+        (tester) async {
+      await tester.pumpApp(
+        Builder(
+          builder: (context) {
+            return ElevatedButton(
+              onPressed: () =>
+                  Navigator.of(context).push(MovieDetailsPage.route(id: 1)),
+              child: const Text('Go to MovieDetailsPage'),
+            );
+          },
+        ),
+      );
+      await tester.tap(find.text('Go to MovieDetailsPage'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(MovieDetailsPage), findsOneWidget);
+    });
+
     testWidgets('renders MovieDetailsView', (tester) async {
       await tester.pumpApp(const MovieDetailsPage(id: 1));
       expect(find.byType(MovieDetailsView), findsOneWidget);

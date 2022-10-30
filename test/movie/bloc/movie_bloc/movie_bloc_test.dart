@@ -57,9 +57,12 @@ void main() {
         build: () => MovieBloc(movieRepository: movieRepository),
         act: (bloc) => bloc.add(SearchQueryChanged('')),
         expect: () => [
-          MovieState.initial().copyWith(status: MovieStatus.loading),
-          MovieState.initial()
-              .copyWith(status: MovieStatus.finished, movies: const [movie]),
+          MovieState.initial().copyWith(status: MovieStatus.loading, query: ''),
+          MovieState.initial().copyWith(
+            status: MovieStatus.finished,
+            movies: const [movie],
+            query: '',
+          ),
         ],
         verify: (bloc) =>
             verify(() => movieRepository.getPopularMovies()).called(1),
@@ -75,9 +78,16 @@ void main() {
         act: (bloc) => bloc.add(SearchQueryChanged('query')),
         wait: const Duration(milliseconds: 301),
         expect: () => [
-          MovieState.initial().copyWith(status: MovieStatus.loading),
-          MovieState.initial()
-              .copyWith(status: MovieStatus.finished, movies: const [movie]),
+          MovieState.initial().copyWith(
+            status: MovieStatus.loading,
+            query: 'query',
+            page: 1,
+          ),
+          MovieState.initial().copyWith(
+            status: MovieStatus.finished,
+            movies: const [movie],
+            query: 'query',
+          ),
         ],
         verify: (bloc) =>
             verify(() => movieRepository.searchMovies(query: 'query'))
@@ -109,9 +119,93 @@ void main() {
         act: (bloc) => bloc.add(SearchQueryChanged('query')),
         wait: const Duration(milliseconds: 301),
         expect: () => [
-          MovieState.initial().copyWith(status: MovieStatus.loading),
+          MovieState.initial()
+              .copyWith(status: MovieStatus.loading, query: 'query'),
           MovieState.initial().copyWith(
             status: MovieStatus.error,
+            query: 'query',
+          ),
+        ],
+      );
+    });
+
+    group('when LoadMoreMoviesRequested', () {
+      blocTest<MovieBloc, MovieState>(
+        'when movies are fetched successfully and query is empty '
+        'emits [MovieStatus.loading, MovieStatus.success] '
+        'calling getPopularMovies with page 2',
+        setUp: () => when(() => movieRepository.getPopularMovies(page: 2))
+            .thenAnswer((_) async => const [movie]),
+        build: () => MovieBloc(movieRepository: movieRepository),
+        act: (bloc) => bloc.add(LoadMoreMoviesRequested()),
+        expect: () => [
+          MovieState.initial().copyWith(
+            status: MovieStatus.finished,
+            movies: const [movie],
+            query: '',
+            page: 2,
+          ),
+        ],
+        verify: (bloc) =>
+            verify(() => movieRepository.getPopularMovies(page: 2)).called(1),
+      );
+
+      blocTest<MovieBloc, MovieState>(
+        'when movies are fetched successfully and query is not empty '
+        'emits [MovieStatus.loading, MovieStatus.success] '
+        'calling searchMovies debounced by 300 miliseconds',
+        seed: () => MovieState.initial().copyWith(
+          query: 'query',
+        ),
+        setUp: () =>
+            when(() => movieRepository.searchMovies(query: 'query', page: 2))
+                .thenAnswer((_) async => const [movie]),
+        build: () => MovieBloc(movieRepository: movieRepository),
+        act: (bloc) => bloc.add(LoadMoreMoviesRequested()),
+        wait: const Duration(milliseconds: 301),
+        expect: () => [
+          MovieState.initial().copyWith(
+            status: MovieStatus.finished,
+            movies: const [movie],
+            query: 'query',
+            page: 2,
+          ),
+        ],
+        verify: (bloc) =>
+            verify(() => movieRepository.searchMovies(query: 'query', page: 2))
+                .called(1),
+      );
+
+      blocTest<MovieBloc, MovieState>(
+        'when getPopularMovies throws '
+        'emits [MovieStatus.loading, MovieStatus.error]',
+        setUp: () => when(() => movieRepository.getPopularMovies())
+            .thenThrow((_) async => Exception()),
+        build: () => MovieBloc(movieRepository: movieRepository),
+        act: (bloc) => bloc.add(LoadMoreMoviesRequested()),
+        expect: () => [
+          MovieState.initial().copyWith(
+            status: MovieStatus.error,
+          ),
+        ],
+      );
+
+      blocTest<MovieBloc, MovieState>(
+        'when searchMovies throws '
+        'emits [MovieStatus.loading, MovieStatus.error] '
+        'debounced by 300 miliseconds',
+        seed: () => MovieState.initial().copyWith(
+          query: 'query',
+        ),
+        setUp: () => when(() => movieRepository.searchMovies(query: 'query'))
+            .thenThrow((_) async => Exception()),
+        build: () => MovieBloc(movieRepository: movieRepository),
+        act: (bloc) => bloc.add(LoadMoreMoviesRequested()),
+        wait: const Duration(milliseconds: 301),
+        expect: () => [
+          MovieState.initial().copyWith(
+            status: MovieStatus.error,
+            query: 'query',
           ),
         ],
       );

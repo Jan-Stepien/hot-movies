@@ -16,5 +16,12 @@ void main() {
         equals(SearchQueryChanged('query')),
       );
     });
+
+    test('LoadMoreMoviesRequested supports value comparisons', () {
+      expect(
+        LoadMoreMoviesRequested(),
+        equals(LoadMoreMoviesRequested()),
+      );
+    });
   });
 }
