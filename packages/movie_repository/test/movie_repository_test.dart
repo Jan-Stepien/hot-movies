@@ -10,6 +10,23 @@ void main() {
   late MovieClient movieClient;
   late MovieRepository movieRepository;
 
+  const movieDTO = MovieDTO(
+    posterPath: 'posterPath',
+    adult: true,
+    overview: 'overview',
+    releaseDate: 'releaseDate',
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalTitle: 'originalTitle',
+    originalLanguage: 'originalLanguage',
+    title: 'title',
+    backdropPath: 'backdropPath',
+    popularity: 1.0,
+    voteCount: 1,
+    video: true,
+    voteAverage: 1.0,
+  );
+
   setUp(() {
     movieClient = MockMovieClient();
     movieRepository = MovieRepository(movieClient: movieClient);
@@ -19,23 +36,6 @@ void main() {
 
   group('MovieRepository', () {
     group('getPopularMovies', () {
-      const movieDTO = MovieDTO(
-        posterPath: 'posterPath',
-        adult: true,
-        overview: 'overview',
-        releaseDate: 'releaseDate',
-        genreIds: [1, 2, 3],
-        id: 1,
-        originalTitle: 'originalTitle',
-        originalLanguage: 'originalLanguage',
-        title: 'title',
-        backdropPath: 'backdropPath',
-        popularity: 1.0,
-        voteCount: 1,
-        video: true,
-        voteAverage: 1.0,
-      );
-
       test('returns list of Movies when succeeds', () async {
         when(() => movieClient.getPopularMovies()).thenAnswer(
           (_) async => [movieDTO],
@@ -102,6 +102,27 @@ void main() {
             ));
 
         verify(() => movieClient.getMovieDetails(id: 1)).called(1);
+      });
+    });
+
+    group('searchMovies', () {
+      test('returns list of Movies when succeeds', () async {
+        when(() => movieClient.searchMovies(query: 'query')).thenAnswer(
+          (_) async => [movieDTO],
+        );
+
+        final result = await movieRepository.searchMovies(query: 'query');
+
+        expect(result.length, 1);
+        expect(
+            result[0],
+            const Movie(
+              id: 1,
+              title: 'title',
+              backdropPath: 'imageBaseUrl/backdropPath',
+            ));
+
+        verify(() => movieClient.searchMovies(query: 'query')).called(1);
       });
     });
   });
