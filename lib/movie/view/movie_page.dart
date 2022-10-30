@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hot_movies/movie/movie.dart';
@@ -46,30 +45,10 @@ class MovieView extends StatelessWidget {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : isLoaded
-              ? SingleChildScrollView(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: movies.length,
-                    itemBuilder: (context, index) => ListTile(
-                      key: ValueKey(movies[index]),
-                      onTap: () => Navigator.of(context).push(
-                        MovieDetailsPage.route(id: movies[index].id),
-                      ),
-                      leading: CircleAvatar(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
-                        backgroundImage: movies[index].backdropPath != null
-                            ? CachedNetworkImageProvider(
-                                movies[index].backdropPath!,
-                              )
-                            : null,
-                      ),
-                      title: Text(movies[index].title),
-                      trailing: const Icon(Icons.chevron_right),
-                    ),
-                    separatorBuilder: (context, index) => const Divider(),
-                  ),
+              ? MovieList(
+                  movies: movies,
+                  onLoadMore: () =>
+                      context.read<MovieBloc>().add(LoadMoreMoviesRequested()),
                 )
               : LoadingContentError(
                   onRetry: () => context.read<MovieBloc>().add(

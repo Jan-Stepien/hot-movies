@@ -23,6 +23,10 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
         isDebounced: (event) => event.query.isNotEmpty,
       ),
     );
+    on<LoadMoreMoviesRequested>(
+      _loadMoreMoviesRequested,
+      transformer: restartable(),
+    );
   }
 
   final MovieRepository _movieRepository;
@@ -45,7 +49,13 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     SearchQueryChanged event,
     Emitter<MovieState> emit,
   ) async {
-    emit(state.copyWith(status: MovieStatus.loading));
+    emit(
+      state.copyWith(
+        status: MovieStatus.loading,
+        query: event.query,
+        page: 1,
+      ),
+    );
     try {
       List<Movie> movies;
       if (event.query.isEmpty) {
@@ -53,7 +63,46 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       } else {
         movies = await _movieRepository.searchMovies(query: event.query);
       }
-      emit(state.copyWith(status: MovieStatus.finished, movies: movies));
+      emit(
+        state.copyWith(
+          status: MovieStatus.finished,
+          movies: movies,
+        ),
+      );
+    } catch (error, stackTrace) {
+      emit(
+        state.copyWith(
+          status: MovieStatus.error,
+        ),
+      );
+      addError(error, stackTrace);
+    }
+  }
+
+  FutureOr<void> _loadMoreMoviesRequested(
+    LoadMoreMoviesRequested event,
+    Emitter<MovieState> emit,
+  ) async {
+    try {
+      List<Movie> movies;
+      if (state.query.isEmpty) {
+        movies = await _movieRepository.getPopularMovies(page: state.page + 1);
+      } else {
+        movies = await _movieRepository.searchMovies(
+          query: state.query,
+          page: state.page + 1,
+        );
+      }
+      emit(
+        state.copyWith(
+          status: MovieStatus.finished,
+          movies: [
+            ...state.movies,
+            ...movies,
+          ],
+          page: state.page + 1,
+        ),
+      );
     } catch (error, stackTrace) {
       emit(state.copyWith(status: MovieStatus.error));
       addError(error, stackTrace);

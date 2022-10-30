@@ -14,8 +14,8 @@ class MovieRepository {
   final MovieClient _movieClient;
 
   /// Returns a list of popular [Movie]s.
-  Future<List<Movie>> getPopularMovies() async {
-    final moviesDTO = await _movieClient.getPopularMovies();
+  Future<List<Movie>> getPopularMovies({int page = 1}) async {
+    final moviesDTO = await _movieClient.getPopularMovies(page: page);
 
     return _mapMovieDTOListToMovieList(moviesDTO: moviesDTO);
   }
@@ -36,8 +36,9 @@ class MovieRepository {
   }
 
   /// Returns a list of [Movie] containing [query].
-  Future<List<Movie>> searchMovies({required String query}) async {
-    final moviesDTO = await _movieClient.searchMovies(query: query);
+  Future<List<Movie>> searchMovies(
+      {required String query, int page = 1}) async {
+    final moviesDTO = await _movieClient.searchMovies(query: query, page: page);
 
     return _mapMovieDTOListToMovieList(moviesDTO: moviesDTO);
   }

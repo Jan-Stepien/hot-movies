@@ -29,11 +29,12 @@ class MovieClient {
   static const basePath = '/movie/';
 
   /// [getPopularMovies] returns a list of popular movies.
-  Future<List<MovieDTO>> getPopularMovies() async {
+  Future<List<MovieDTO>> getPopularMovies({int page = 1}) async {
     const getPopularMoviesPath = 'popular';
 
-    final uri = Uri.parse(_baseUrl + basePath + getPopularMoviesPath)
-        .replace(queryParameters: getApiKeyQueryParameter);
+    final uri = Uri.parse(_baseUrl + basePath + getPopularMoviesPath).replace(
+        queryParameters: getApiKeyQueryParameter
+          ..addAll({'page': page.toString()}));
 
     try {
       final response = await _httpClient.get(uri);
@@ -78,11 +79,13 @@ class MovieClient {
   }
 
   /// [searchMovies] returns a list of [MovieDTO] containing [query].
-  Future<List<MovieDTO>> searchMovies({required String query}) async {
+  Future<List<MovieDTO>> searchMovies(
+      {required String query, int page = 1}) async {
     const searchMoviesPath = '/search/movie';
 
     final uri = Uri.parse(_baseUrl + searchMoviesPath).replace(
-        queryParameters: getApiKeyQueryParameter..addAll({'query': query}));
+        queryParameters: getApiKeyQueryParameter
+          ..addAll({'query': query, 'page': page.toString()}));
 
     try {
       final response = await _httpClient.get(uri);

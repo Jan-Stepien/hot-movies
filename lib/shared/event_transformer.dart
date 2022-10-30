@@ -11,3 +11,9 @@ EventTransformer<Event> restartableDebounce<Event>(
     return otherEvents.merge(debouncedEvents).switchMap(mapper);
   };
 }
+
+EventTransformer<Event> restartable<Event>() {
+  return (events, mapper) {
+    return events.switchMap(mapper);
+  };
+}
